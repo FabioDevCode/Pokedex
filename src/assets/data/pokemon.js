@@ -141,4 +141,4 @@ const pokemon = [
     // },
 ];
 
-export { pokemon };
+export default { pokemon };
