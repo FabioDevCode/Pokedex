@@ -7,7 +7,7 @@
         <div id="bloc_left" class="bloc">
             <div class="border_screen">
                 <div class="screen_left">
-
+                    <!-- <img src="./assets/photo/Évoli.png" alt="Pokemon"> -->
                 </div>
             </div>
 
@@ -16,7 +16,16 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"/></svg>
                 </button>
 
-                <div class="screen_down"></div>
+                <div class="screen_down">
+                    <div :key="pok.id" class="list_pokemon" v-for="pok in pokemon">
+                        <img>
+                        <div class="list_text">
+                            <p></p>
+                            <p></p>
+                        </div>
+                    </div>
+
+                </div>
 
                 <div class="bloc_direction">
                     <div class="btn_dir1"></div>
@@ -101,7 +110,16 @@
         data() {
             return {
                 pokemon: '',
-                actual: 0,
+                actual: '',
+
+                photo: '',
+                cri: '',
+                evol: '',
+                desc: '',
+                weakness: '',
+                strongest: '',
+                height: '',
+                weight: '',
             }
         },
         mounted() {
@@ -191,14 +209,22 @@
         width: 350px;
         height: 280px;
         background-color: #333333;
-        box-shadow: inset 4px 4px 15px rgba(1, 1, 1, .8);
+        box-shadow: inset 4px 4px 15px rgba(1, 1, 1, .8),
+                    0 0 16px 12px rgba(1, 1, 1, .3);
         border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
+    .screen_left img {
+        height: 65%;
+        width: auto;
+    }
+
     .screen_left, .screen_down, .screen_right {
         overflow-y: auto;
         overflow-x: hidden;
     }
-
     .bottom_bloc {
         height: 220px;
         width: 450px;
@@ -312,7 +338,6 @@
     /*------RIGHT------*/
     #bloc_right {
         padding-left: 100px;
-
     }
     .screen_right {
         width: 350px;
@@ -391,6 +416,10 @@
         overflow: hidden;
     }
 
+    svg {
+        filter: drop-shadow(4px 4px 12px rgba(1, 1, 1, .4));
+    }
+
     /*------FOOTER------*/
     footer {
         height: 100px;
@@ -408,5 +437,15 @@
         color: #333333;
         text-shadow: 0 0 2px #333333;
     }
+
+    /* .list_pokemon {
+        background-color: #999999;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 50px;
+        font-family: 'Audiowide', cursive;
+        font-size: .9em;
+    } */
 
 </style>

@@ -2,7 +2,7 @@ const pokemon = [
     {
         id: 1,
         name: "Bulbizarre",
-        preview: "001.png",
+        preview: "./assets/miniature/001.png",
         view: "Bulbizarre.png",
         evol: [2],
         type: "Plante",
