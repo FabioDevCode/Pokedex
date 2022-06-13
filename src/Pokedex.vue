@@ -7,29 +7,38 @@
         <div id="bloc_left" class="bloc">
             <div class="border_screen">
                 <div class="screen_left">
-                    <!-- <img src="./assets/photo/Évoli.png" alt="Pokemon"> -->
+                    <!-- <img src="" alt="Pokemon"> -->
                 </div>
             </div>
 
             <div class="bottom_bloc">
                 <button class="select">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M279.6 160.4C282.4 160.1 285.2 160 288 160C341 160 384 202.1 384 256C384 309 341 352 288 352C234.1 352 192 309 192 256C192 253.2 192.1 250.4 192.4 247.6C201.7 252.1 212.5 256 224 256C259.3 256 288 227.3 288 192C288 180.5 284.1 169.7 279.6 160.4zM480.6 112.6C527.4 156 558.7 207.1 573.5 243.7C576.8 251.6 576.8 260.4 573.5 268.3C558.7 304 527.4 355.1 480.6 399.4C433.5 443.2 368.8 480 288 480C207.2 480 142.5 443.2 95.42 399.4C48.62 355.1 17.34 304 2.461 268.3C-.8205 260.4-.8205 251.6 2.461 243.7C17.34 207.1 48.62 156 95.42 112.6C142.5 68.84 207.2 32 288 32C368.8 32 433.5 68.84 480.6 112.6V112.6zM288 112C208.5 112 144 176.5 144 256C144 335.5 208.5 400 288 400C367.5 400 432 335.5 432 256C432 176.5 367.5 112 288 112z"/></svg>
                 </button>
 
                 <div class="screen_down">
-                    <div :key="pok.id" class="list_pokemon" v-for="pok in pokemon">
-                        <img>
+                    <div :key="pok.id" :id="pok.id" class="list_pokemon" @click="selectPok(pok.id)" v-for="pok in pokemon">
+                        <img :src="pok.preview" :alt="pok.name">
                         <div class="list_text">
-                            <p></p>
-                            <p></p>
+                            <p> {{ pok.name }} </p>
+                            <p> {{ pok.number }} </p>
+                            <p class="none view"> {{ pok.view }} </p>
+                            <p class="none desc"> {{ pok.desc }} </p>
+                            <p class="none cri"> {{ pok.song }} </p>
+                            <p class="none type"> {{ pok.type }} </p>
+                            <p class="none taille"> {{ pok.height }} </p>
+                            <p class="none poids"> {{ pok.weight }} </p>
+                            <p class="none force"> {{ pok.strongest }} </p>
+                            <p class="none faiblesse"> {{ pok.weakness }} </p>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="bloc_direction">
                     <div class="btn_dir1"></div>
                     <div class="btn_dir2"></div>
+
+                    <div class="dir_center"></div>
 
                     <button class="up">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224z"/></svg>
@@ -103,13 +112,14 @@
 
 
 <script>
-    import pokemon_list from "./assets/data/pokemon.js";
+    import { list } from "postcss";
+import { pokemon_list } from "./assets/data/pokemon.js";
 
     export default {
         name: 'Pokedex',
         data() {
             return {
-                pokemon: '',
+                pokemon: pokemon_list,
                 actual: '',
 
                 photo: '',
@@ -122,14 +132,40 @@
                 weight: '',
             }
         },
-        mounted() {
-            this.getAllPokemon();
-        },
         methods: {
-            getAllPokemon() {
-                this.pokemon = pokemon_list;
-            },
+            selectPok(id) {
+                const list_pokemon = document.querySelectorAll(".list_pokemon");
+                list_pokemon.forEach(el => {
+                    el.classList.remove('selected');
+                })
 
+                const pokemonChoosed = list_pokemon[id-1];
+
+                pokemonChoosed.classList.add('selected');
+
+                console.log(pokemonChoosed)
+            },
+            showPokemon() {
+                // Show pokemon en grand + synthèse toutes les infos
+            },
+            showRandomPokemon() {
+                // Show un pokemon aléatoire
+            },
+            showDesc() {
+                // Affiche la description unique
+            },
+            showEvol() {
+                // Affiche la minaiture de l'évolution unique
+            },
+            playCri() {
+                // Joue le cri du pokemon (audio) une fois + affiche icon en gros
+            },
+            showStrongest() {
+                // Affiche les forces du pokemon (type) unique
+            },
+            showWeakness() {
+                // Affiche les faiblesses du pokemon (type) unique
+            },
 
         },
     }
@@ -165,6 +201,37 @@
         transform: scale(.95);
     }
 
+    /*-------SCROLL-------*/
+    * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(30, 30, 30) rgb(255, 255, 255, .2);
+    }
+
+    *::-webkit-scrollbar {
+        width: 8px;
+        height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, .2);
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-button {
+        width: 0px;
+        height: 0px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #F3F3F3;
+        border-radius: 50px;
+    }
+
+    ::selection {
+        background-color: transparent;
+        color: white;
+    }
+
     /* TEXTE
     font-family: 'Audiowide', cursive; */
     /* DESCRIPTION
@@ -187,13 +254,14 @@
         height: 620px;
         margin: 0 auto;
         display: flex;
-        /* background-color: brown; */
     }
+
     main .bloc {
         position: relative;
         width: 450px;
         height: 620px;
     }
+
     .border_screen {
         display: flex;
         justify-content: center;
@@ -205,17 +273,18 @@
         height: 400px;
         border-radius: 10px 10px 10px 50px;
     }
+
     .screen_left {
         width: 350px;
         height: 280px;
         background-color: #333333;
-        box-shadow: inset 4px 4px 15px rgba(1, 1, 1, .8),
-                    0 0 16px 12px rgba(1, 1, 1, .3);
+        box-shadow: inset 4px 4px 15px rgba(1, 1, 1, .8);
         border-radius: 5px;
         display: flex;
         justify-content: center;
         align-items: center;
     }
+
     .screen_left img {
         height: 65%;
         width: auto;
@@ -225,11 +294,13 @@
         overflow-y: auto;
         overflow-x: hidden;
     }
+
     .bottom_bloc {
         height: 220px;
         width: 450px;
         display: flex;
     }
+
     .select {
         cursor: pointer;
         background-color: #222222;
@@ -242,12 +313,13 @@
     }
 
     .select svg {
-        height: 40%;
+        height: 35%;
         fill: #3e3e3e;
     }
 
     .screen_down {
         margin: 0 0 0 25px;
+        padding: 10px 0;
         align-self: flex-end;
         height: 100px;
         width: 180px;
@@ -266,13 +338,15 @@
         height: 150px;
         width: 150px;
     }
+
     .bloc_direction button  {
         display: flex;
         align-items: center;
         justify-content: center;
     }
+
     .bloc_direction button svg {
-        height: 40%;
+        height: 45%;
         fill: #3e3e3e;
     }
 
@@ -283,6 +357,7 @@
         background-color: #222222;
         border-radius: 8px;
     }
+
     .btn_dir2 {
         position: absolute;
         height: 50px;
@@ -290,49 +365,70 @@
         background-color: #222222;
         border-radius: 8px;
     }
-    .up {
+
+    .dir_center {
+        position: absolute;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        transform: scale(.90);
+        background-color: #252525;
+        box-shadow: inset -5px -5px 5px rgba(200, 200, 200, .1),
+                    inset 5px 5px 5px rgba(2, 2, 2, .4);
+    }
+
+    .up, .left, .right, .down {
         cursor: pointer;
         position: absolute;
-        top: 0;
         border-radius: 8px;
         background-color: #252525;
-        box-shadow: inset 2px 2px 4px rgba(243, 243, 243, .2);
+        box-shadow: inset 2px 2px 4px rgba(243, 243, 243, .2),
+                    inset -2px -2px 4px rgba(2, 2, 2, .8);
         height: 50px;
         width: 50px;
         transform: scale(.90);
+    }
+    .up {
+        top: 0;
     }
     .left {
-        cursor: pointer;
-        position: absolute;
         left: 0;
-        border-radius: 8px;
-        background-color: #252525;
-        box-shadow: inset 2px 2px 4px rgba(243, 243, 243, .2);
-        height: 50px;
-        width: 50px;
-        transform: scale(.90);
     }
     .right {
-        cursor: pointer;
-        position: absolute;
         right: 0;
-        border-radius: 8px;
-        background-color: #252525;
-        box-shadow: inset -2px -2px 6px rgba(1, 1, 1, .8);
-        height: 50px;
-        width: 50px;
-        transform: scale(.90);
     }
     .down {
-        cursor: pointer;
-        position: absolute;
         bottom: 0;
-        border-radius: 8px;
-        background-color: #252525;
-        box-shadow: inset -2px -2px 6px rgba(1, 1, 1, .8);
-        height: 50px;
-        width: 50px;
-        transform: scale(.90);
+    }
+    .up:active, .left:active, .right:active, .down:active {
+        transform: scale(.86);
+    }
+
+    /*------LISTE------*/
+    .list_pokemon {
+        cursor: pointer;
+        height: 40px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        font-family: 'Audiowide', cursive;
+        font-size: .80em;
+        width: 90%;
+        margin: 0 auto;
+        letter-spacing: .5px;
+    }
+
+    .list_pokemon:hover {
+        background-color: rgba(255, 255, 255, .1);
+    }
+
+    .selected {
+        background-color: rgba(255, 255, 255, .3);
+    }
+
+    .list_pokemon img {
+        height: 98%;
+        margin-right: 10px;
     }
 
     /*------RIGHT------*/
@@ -358,6 +454,7 @@
         align-items: center;
         background: radial-gradient(#853a36, transparent);
     }
+
     .bloc_btn_blue button {
         cursor: pointer;
         width: 65px;
@@ -370,7 +467,7 @@
     }
 
     .bloc_btn_blue button svg {
-        height: 40%;
+        height: 35%;
         fill: #2277ab;
     }
 
@@ -395,7 +492,7 @@
                     inset -2px -2px 8px rgba(1, 1, 1, .6);
     }
     .bloc_btn_grey button svg {
-        height: 40%;
+        height: 35%;
         fill: #999999;
     }
 
@@ -420,6 +517,11 @@
         filter: drop-shadow(4px 4px 12px rgba(1, 1, 1, .4));
     }
 
+    .none {
+        visibility: hidden;
+        display: none;
+    }
+
     /*------FOOTER------*/
     footer {
         height: 100px;
@@ -437,15 +539,5 @@
         color: #333333;
         text-shadow: 0 0 2px #333333;
     }
-
-    /* .list_pokemon {
-        background-color: #999999;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        height: 50px;
-        font-family: 'Audiowide', cursive;
-        font-size: .9em;
-    } */
 
 </style>
