@@ -31,24 +31,9 @@
 
 ##
 
-<br>
-
 #### Disponible par Pokémon :
 
-<div>
-   <ul>
-    <li> Nom  </li>
-    <li> Type unique </li>
-    <li> Photo (image) </li>
-    <li> Description </li>
-    <li> Taille moyenne </li>
-    <li> Poids moyen </li>
-    <li> Cri (audio)</li>
-    <li> Forces (type) </li>
-    <li> Faiblesses (type) </li>
-  </ul>
-</div>
-
+<p>Nom, Photo, Type unique, Description, Cri, Taille moyenne, Poids moyen, Forces & Faiblesses.</p>
 
 
 <br>
