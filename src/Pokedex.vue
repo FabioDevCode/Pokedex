@@ -152,7 +152,7 @@
         name: 'Pokedex',
         data() {
             return {
-                pokemon: pokemon_list,
+                pokemon: [],
                 actual: '',
                 show: false,
 
@@ -168,6 +168,17 @@
                 height: '',
                 weight: '',
             }
+        },
+        mounted() {
+            const pokemon_array = pokemon_list;
+            const pokemonRework = [];
+
+            pokemon_array.forEach(pok => {
+                const obj_pok = {...pok}
+                pokemonRework.push(obj_pok);
+            })
+
+            this.pokemon = pokemonRework;
         },
         methods: {
             selectPok(id) {
@@ -216,8 +227,6 @@
                 this.strongest = strong;
                 this.height = pokShow.height;
                 this.weight = pokShow.weight;
-
-                console.log(this.weakness)
             },
             resetAll() {
                 const list_pokemon = document.querySelectorAll(".list_pokemon");
