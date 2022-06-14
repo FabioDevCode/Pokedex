@@ -191,23 +191,23 @@
 
                 const evol_array = [];
                 for(let i = 0; i < pokShow.evol.length; i++) {
-                    evol_array.push(`./assets/miniature/00${pokShow.evol[i]}.png`)
+                    evol_array.push(`../assets/miniature/00${pokShow.evol[i]}.png`)
                 }
 
                 const weak = [];
                 for(let i = 0; i < pokShow.weakness.length; i++) {
-                    weak.push(`./assets/type/${pokShow.weakness[i]}.png`)
+                    weak.push(`../assets/type/${pokShow.weakness[i]}.png`)
                 }
 
                 const strong = [];
                 for(let i = 0; i < pokShow.strongest.length; i++) {
-                    strong.push(`./assets/type/${pokShow.strongest[i]}.png`)
+                    strong.push(`../assets/type/${pokShow.strongest[i]}.png`)
                 }
 
                 this.show = true;
                 this.number = pokShow.number;
                 this.name = pokShow.name;
-                this.type = `./assets/type/${pokShow.type}.png`;
+                this.type = `../assets/type/${pokShow.type}.png`;
                 this.photo = pokShow.view;
                 this.cri = pokShow.song;
                 this.evol = evol_array;
