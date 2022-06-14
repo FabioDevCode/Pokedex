@@ -1,6 +1,6 @@
 <template>
     <header>
-        <img src="./assets/pokedex_title white.png" alt="logo pokedex">
+        <img src="./assets/pokedex_title_white.png" alt="logo pokedex">
     </header>
 
     <main>
