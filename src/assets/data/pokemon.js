@@ -125,7 +125,7 @@ export const pokemon_list = [
         name: "Tortank",
         preview: "./src/assets/miniature/009.png",
         view: "./src/assets/photo/Tortank.png",
-        evol: [9],
+        evol: [],
         type: "Eau",
         height: "1,60 m",
         weight: "85,50 kg",
