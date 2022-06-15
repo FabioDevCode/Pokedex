@@ -1,10 +1,10 @@
 <br>
 
 <div align="center" style="display: flex">
-  <img src="./src/assets/readme_title.png" alt="Flat Pokedex Logo" />
+  <img height="120px" src="./src/assets/readme_title.png" alt="Flat Pokedex Logo" />
 </div>
 
-<h1 align="center"> Kanto </h1>
+<h1 align="center"> Kanto - 1er Gen. </h1>
 
 
 #### Disponible par Pokémon :
