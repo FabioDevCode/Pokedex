@@ -9,7 +9,7 @@
 
 #### Disponible par Pokémon :
 
-<p>Nom, Photo, Type unique, Description, Cri, Taille moyenne, Poids moyen, Forces & Faiblesses.</p>
+<p>Nom, Photo, Types, Description, Cri, Taille moyenne, Poids moyen, Forces & Faiblesses.</p>
 
 
 <br>
