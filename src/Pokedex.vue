@@ -18,7 +18,7 @@
                     </button>
                 </div>
 
-                <div class="screen_down">
+                <div class="screen_down grid">
                     <div :key="pok.id" :id="pok.id" class="list_pokemon" @click="selectPok(pok.id)" v-for="pok in pokemon">
                         <img :src="pok.preview" :alt="pok.name">
                         <div class="list_text">
@@ -52,16 +52,24 @@
         <!-- SEPERATION - Haut Gauche / Bas Droite -->
         <div id="bloc_right" class="bloc">
             <div class="screen_right">
-                <div class="desc_all">
-                    <h2 v-if="name.length > 0" id="name"> {{ number }} - {{ name }} </h2>
-                    <img v-if="type.length > 0" id="type" :src="type" alt="type du pokémon">
+                <div v-if="show" class="desc_all">
+                    <div class="header_name_type">
+                        <h2 v-if="name.length > 0" id="name"> {{ number }} - {{ name }} </h2>
+                        <div v-if="type.length > 0">
+                            <img id="type" :key="ty" v-for="ty in type" :src="ty" alt="type du pokémon">
+                        </div>
+                    </div>
                     <p v-if="desc.length > 0" id="desc">
                         {{ desc }}
                     </p>
                     <div v-if="evol.length > 0" id="evol">
-                        <p>Evolution</p>
-                        <div class="evol_img">
-                            <img :key="ev" v-for="ev in evol" :src="ev" alt="Evolution">
+                        <p class="evol_title">Evolution</p>
+                        <div class="evol_img" :key="ev" v-for="ev in evol">
+                            <img :src="ev.src" alt="Evolution">
+                            <div class="evols_txt">
+                                <p> {{ ev.name }} </p>
+                                <p> {{ ev.number }} </p>
+                            </div>
                         </div>
                     </div>
                     <div v-if="weakness.length > 0 || strongest.length > 0" id="force_faiblesse">
@@ -74,22 +82,20 @@
                             <img :key="weak" id="type" v-for="weak in weakness" :src="weak" alt="Type faiblesse">
                        </div>
                     </div>
-
-
                 </div>
             </div>
 
             <div class="bloc_btn_blue">
-                <button>
+                <button @click="showAllInfo()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M336 64h-53.88C268.9 26.8 233.7 0 192 0S115.1 26.8 101.9 64H48C21.5 64 0 85.48 0 112v352C0 490.5 21.5 512 48 512h288c26.5 0 48-21.48 48-48v-352C384 85.48 362.5 64 336 64zM96 392c-13.25 0-24-10.75-24-24S82.75 344 96 344s24 10.75 24 24S109.3 392 96 392zM96 296c-13.25 0-24-10.75-24-24S82.75 248 96 248S120 258.8 120 272S109.3 296 96 296zM192 64c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S160 113.7 160 96C160 78.33 174.3 64 192 64zM304 384h-128C167.2 384 160 376.8 160 368C160 359.2 167.2 352 176 352h128c8.801 0 16 7.199 16 16C320 376.8 312.8 384 304 384zM304 288h-128C167.2 288 160 280.8 160 272C160 263.2 167.2 256 176 256h128C312.8 256 320 263.2 320 272C320 280.8 312.8 288 304 288z"/></svg>
                 </button>
-                <button>
+                <button @click="showDesc()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM64 256C64 238.3 78.33 224 96 224H480C497.7 224 512 238.3 512 256C512 273.7 497.7 288 480 288H96C78.33 288 64 273.7 64 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
                 </button>
-                <button>
+                <button @click="showEvol()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M.1193 494.1c-1.125 9.5 6.312 17.87 15.94 17.87l32.06 .0635c8.125 0 15.21-5.833 16.21-13.83c.7501-4.875 1.869-11.17 3.494-18.17h312c1.625 6.875 2.904 13.31 3.529 18.18c1.125 7.1 7.84 13.94 15.97 13.82l32.46-.0625c9.625 0 17.12-8.374 15.99-17.87c-4.625-37.87-25.75-128.1-119.1-207.7c-17.5 12.37-36.98 24.37-58.48 35.49c6.25 4.625 11.56 9.405 17.06 14.15H159.7c21.25-18.12 47.03-35.63 78.65-51.38c172.1-85.5 203.7-218.8 209.5-266.7c1.125-9.5-6.297-17.88-15.92-17.88L399.6 .001c-8.125 0-14.84 5.832-15.96 13.83c-.7501 4.875-1.869 11.17-3.369 18.17H67.74C66.24 25 65.08 18.81 64.33 13.81C63.21 5.813 56.48-.124 48.36 .001L16.1 .1338c-9.625 0-17.09 8.354-15.96 17.85c5.125 42.87 31.29 153.8 159.9 238.1C31.55 340.3 5.245 451.2 .1193 494.1zM223.9 219.7C198.8 205.9 177.6 191.3 159.7 176h128.5C270.4 191.3 249 206.1 223.9 219.7zM355.1 96c-5.875 10.37-12.88 21.12-21 31.1H113.1c-8.25-10.87-15.3-21.63-21.05-32L355.1 96zM93 415.1c5.875-10.37 12.74-21.13 20.87-32h219.4c8.375 10.87 15.48 21.63 21.23 32H93z"/></svg>
                 </button>
-                <button>
+                <button @click="showStrongest()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M416 288h-95.1c-17.67 0-32 14.33-32 32s14.33 32 32 32H416c17.67 0 32-14.33 32-32S433.7 288 416 288zM352 416h-32c-17.67 0-32 14.33-32 32s14.33 32 32 32h32c17.67 0 31.1-14.33 31.1-32S369.7 416 352 416zM480 160h-159.1c-17.67 0-32 14.33-32 32s14.33 32 32 32H480c17.67 0 32-14.33 32-32S497.7 160 480 160zM544 32h-223.1c-17.67 0-32 14.33-32 32s14.33 32 32 32H544c17.67 0 32-14.33 32-32S561.7 32 544 32zM151.6 41.95c-12.12-13.26-35.06-13.26-47.19 0l-87.1 96.09C4.475 151.1 5.35 171.4 18.38 183.3c6.141 5.629 13.89 8.414 21.61 8.414c8.672 0 17.3-3.504 23.61-10.39L96 145.9v302C96 465.7 110.3 480 128 480s32-14.33 32-32.03V145.9L192.4 181.3C204.4 194.3 224.6 195.3 237.6 183.3c13.03-11.95 13.9-32.22 1.969-45.27L151.6 41.95z"/></svg>
                 </button>
                 <button>
@@ -98,13 +104,15 @@
                 <button class="shuffle">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M424.1 287c-15.13-15.12-40.1-4.426-40.1 16.97V352H336L153.6 108.8C147.6 100.8 138.1 96 128 96H32C14.31 96 0 110.3 0 128s14.31 32 32 32h80l182.4 243.2C300.4 411.3 309.9 416 320 416h63.97v47.94c0 21.39 25.86 32.12 40.99 17l79.1-79.98c9.387-9.387 9.387-24.59 0-33.97L424.1 287zM336 160h47.97v48.03c0 21.39 25.87 32.09 40.1 16.97l79.1-79.98c9.387-9.391 9.385-24.59-.0013-33.97l-79.1-79.98c-15.13-15.12-40.99-4.391-40.99 17V96H320c-10.06 0-19.56 4.75-25.59 12.81L254 162.7L293.1 216L336 160zM112 352H32c-17.69 0-32 14.31-32 32s14.31 32 32 32h96c10.06 0 19.56-4.75 25.59-12.81l40.4-53.87L154 296L112 352z"/></svg>
                 </button>
-                <button class="reset" @click="resetAll()">
-                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M480 256c0 123.4-100.5 223.9-223.9 223.9c-48.84 0-95.17-15.58-134.2-44.86c-14.12-10.59-16.97-30.66-6.375-44.81c10.59-14.12 30.62-16.94 44.81-6.375c27.84 20.91 61 31.94 95.88 31.94C344.3 415.8 416 344.1 416 256s-71.69-159.8-159.8-159.8c-37.46 0-73.09 13.49-101.3 36.64l45.12 45.14c17.01 17.02 4.955 46.1-19.1 46.1H35.17C24.58 224.1 16 215.5 16 204.9V59.04c0-24.04 29.07-36.08 46.07-19.07l47.6 47.63C149.9 52.71 201.5 32.11 256.1 32.11C379.5 32.11 480 132.6 480 256z"/></svg>
+                <button class="github">
+                    <a href="https://github.com/FabioDevCode" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+                    </a>
                 </button>
                 <button class="cri_pokemon" @click="playCri()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M412.6 182c-10.28-8.334-25.41-6.867-33.75 3.402c-8.406 10.24-6.906 25.35 3.375 33.74C393.5 228.4 400 241.8 400 255.1c0 14.17-6.5 27.59-17.81 36.83c-10.28 8.396-11.78 23.5-3.375 33.74c4.719 5.806 11.62 8.802 18.56 8.802c5.344 0 10.75-1.779 15.19-5.399C435.1 311.5 448 284.6 448 255.1S435.1 200.4 412.6 182zM473.1 108.2c-10.22-8.334-25.34-6.898-33.78 3.34c-8.406 10.24-6.906 25.35 3.344 33.74C476.6 172.1 496 213.3 496 255.1s-19.44 82.1-53.31 110.7c-10.25 8.396-11.75 23.5-3.344 33.74c4.75 5.775 11.62 8.771 18.56 8.771c5.375 0 10.75-1.779 15.22-5.431C518.2 366.9 544 313 544 255.1S518.2 145 473.1 108.2zM534.4 33.4c-10.22-8.334-25.34-6.867-33.78 3.34c-8.406 10.24-6.906 25.35 3.344 33.74C559.9 116.3 592 183.9 592 255.1s-32.09 139.7-88.06 185.5c-10.25 8.396-11.75 23.5-3.344 33.74C505.3 481 512.2 484 519.2 484c5.375 0 10.75-1.779 15.22-5.431C601.5 423.6 640 342.5 640 255.1S601.5 88.34 534.4 33.4zM301.2 34.98c-11.5-5.181-25.01-3.076-34.43 5.29L131.8 160.1H48c-26.51 0-48 21.48-48 47.96v95.92c0 26.48 21.49 47.96 48 47.96h83.84l134.9 119.8C272.7 477 280.3 479.8 288 479.8c4.438 0 8.959-.9314 13.16-2.835C312.7 471.8 320 460.4 320 447.9V64.12C320 51.55 312.7 40.13 301.2 34.98z"/></svg>
                 </button>
-                <button>
+                <button @click="showWeakness()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M320 224H416c17.67 0 32-14.33 32-32s-14.33-32-32-32h-95.1c-17.67 0-32 14.33-32 32S302.3 224 320 224zM320 352H480c17.67 0 32-14.33 32-32s-14.33-32-32-32h-159.1c-17.67 0-32 14.33-32 32S302.3 352 320 352zM320 96h32c17.67 0 31.1-14.33 31.1-32s-14.33-32-31.1-32h-32c-17.67 0-32 14.33-32 32S302.3 96 320 96zM544 416h-223.1c-17.67 0-32 14.33-32 32s14.33 32 32 32H544c17.67 0 32-14.33 32-32S561.7 416 544 416zM192.4 330.7L160 366.1V64.03C160 46.33 145.7 32 128 32S96 46.33 96 64.03v302L63.6 330.7c-6.312-6.883-14.94-10.38-23.61-10.38c-7.719 0-15.47 2.781-21.61 8.414c-13.03 11.95-13.9 32.22-1.969 45.27l87.1 96.09c12.12 13.26 35.06 13.26 47.19 0l87.1-96.09c11.94-13.05 11.06-33.31-1.969-45.27C224.6 316.8 204.4 317.7 192.4 330.7z"/></svg>
                 </button>
                 <button>
@@ -113,11 +121,12 @@
             </div>
 
             <div class="bloc_btn_grey">
-                <button>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M31.1 64.03c-17.67 0-31.1 14.33-31.1 32v319.9c0 17.67 14.33 32 32 32C49.67 447.1 64 433.6 64 415.1V96.03C64 78.36 49.67 64.03 31.1 64.03zM267.5 71.41l-192 159.1C67.82 237.8 64 246.9 64 256c0 9.094 3.82 18.18 11.44 24.62l192 159.1c20.63 17.12 52.51 2.75 52.51-24.62v-319.9C319.1 68.66 288.1 54.28 267.5 71.41z"/></svg>
+                <button @click="toggleGrid()">
+                    <svg v-if="toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M128 184C128 206.1 110.1 224 88 224H40C17.91 224 0 206.1 0 184V136C0 113.9 17.91 96 40 96H88C110.1 96 128 113.9 128 136V184zM128 376C128 398.1 110.1 416 88 416H40C17.91 416 0 398.1 0 376V328C0 305.9 17.91 288 40 288H88C110.1 288 128 305.9 128 328V376zM160 136C160 113.9 177.9 96 200 96H248C270.1 96 288 113.9 288 136V184C288 206.1 270.1 224 248 224H200C177.9 224 160 206.1 160 184V136zM288 376C288 398.1 270.1 416 248 416H200C177.9 416 160 398.1 160 376V328C160 305.9 177.9 288 200 288H248C270.1 288 288 305.9 288 328V376zM320 136C320 113.9 337.9 96 360 96H408C430.1 96 448 113.9 448 136V184C448 206.1 430.1 224 408 224H360C337.9 224 320 206.1 320 184V136zM448 376C448 398.1 430.1 416 408 416H360C337.9 416 320 398.1 320 376V328C320 305.9 337.9 288 360 288H408C430.1 288 448 305.9 448 328V376z"/></svg>
+                    <svg v-if="!toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M88 48C101.3 48 112 58.75 112 72V120C112 133.3 101.3 144 88 144H40C26.75 144 16 133.3 16 120V72C16 58.75 26.75 48 40 48H88zM480 64C497.7 64 512 78.33 512 96C512 113.7 497.7 128 480 128H192C174.3 128 160 113.7 160 96C160 78.33 174.3 64 192 64H480zM480 224C497.7 224 512 238.3 512 256C512 273.7 497.7 288 480 288H192C174.3 288 160 273.7 160 256C160 238.3 174.3 224 192 224H480zM480 384C497.7 384 512 398.3 512 416C512 433.7 497.7 448 480 448H192C174.3 448 160 433.7 160 416C160 398.3 174.3 384 192 384H480zM16 232C16 218.7 26.75 208 40 208H88C101.3 208 112 218.7 112 232V280C112 293.3 101.3 304 88 304H40C26.75 304 16 293.3 16 280V232zM88 368C101.3 368 112 378.7 112 392V440C112 453.3 101.3 464 88 464H40C26.75 464 16 453.3 16 440V392C16 378.7 26.75 368 40 368H88z"/></svg>
                 </button>
-                <button>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M287.1 447.1c17.67 0 31.1-14.33 31.1-32V96.03c0-17.67-14.33-32-32-32c-17.67 0-31.1 14.33-31.1 31.1v319.9C255.1 433.6 270.3 447.1 287.1 447.1zM52.51 440.6l192-159.1c7.625-6.436 11.43-15.53 11.43-24.62c0-9.094-3.809-18.18-11.43-24.62l-192-159.1C31.88 54.28 0 68.66 0 96.03v319.9C0 443.3 31.88 457.7 52.51 440.6z"/></svg>
+                <button class="reset" @click="resetAll()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M480 256c0 123.4-100.5 223.9-223.9 223.9c-48.84 0-95.17-15.58-134.2-44.86c-14.12-10.59-16.97-30.66-6.375-44.81c10.59-14.12 30.62-16.94 44.81-6.375c27.84 20.91 61 31.94 95.88 31.94C344.3 415.8 416 344.1 416 256s-71.69-159.8-159.8-159.8c-37.46 0-73.09 13.49-101.3 36.64l45.12 45.14c17.01 17.02 4.955 46.1-19.1 46.1H35.17C24.58 224.1 16 215.5 16 204.9V59.04c0-24.04 29.07-36.08 46.07-19.07l47.6 47.63C149.9 52.71 201.5 32.11 256.1 32.11C379.5 32.11 480 132.6 480 256z"/></svg>
                 </button>
             </div>
 
@@ -138,7 +147,6 @@
         </div>
     </main>
 
-
     <footer>
         <p>Coded by <a target="_blank" href="https://www.linkedin.com/in/fabio-ramoslopes/">Fabio R. LOPES</a></p>
     </footer>
@@ -155,18 +163,24 @@
                 pokemon: pokemon_list,
                 actual: '',
                 show: false,
+                toggle: true,
 
                 name: '',
                 number: '',
-                type: '',
+                type: [],
                 photo: '',
                 cri: '',
-                evol: [],
                 desc: '',
                 weakness: [],
                 strongest: [],
                 height: '',
                 weight: '',
+                evol: [],
+
+                curr_desc: '',
+                curr_evol: [],
+                curr_str: [],
+                curr_weak: [],
             }
         },
         methods: {
@@ -190,9 +204,14 @@
                 const pokShow = this.pokemon[this.actual-1];
 
                 const evol_array = [];
-                for(let i = 0; i < pokShow.evol.length; i++) {
-                    evol_array.push(`./miniature/00${pokShow.evol[i]}.png`)
-                }
+                pokShow.evol.forEach(el => {
+                    const pok = {
+                        src: `./miniature/${this.pokemon[el-1].number}.png`,
+                        name: this.pokemon[el-1].name,
+                        number: this.pokemon[el-1].number,
+                    }
+                    evol_array.push(pok);
+                })
 
                 const weak = [];
                 for(let i = 0; i < pokShow.weakness.length; i++) {
@@ -204,18 +223,28 @@
                     strong.push(`./type/${pokShow.strongest[i]}.png`)
                 }
 
+                const type_array = [];
+                pokShow.type.forEach(ty => {
+                    type_array.push(`./type/${ty}.png`);
+                })
+
                 this.show = true;
+                this.photo = pokShow.view;
                 this.number = pokShow.number;
                 this.name = pokShow.name;
-                this.type = `./type/${pokShow.type}.png`;
-                this.photo = pokShow.view;
-                this.cri = pokShow.song;
                 this.evol = evol_array;
+                this.type = type_array;
+                this.cri = pokShow.song;
                 this.desc = pokShow.desc;
                 this.weakness = weak;
                 this.strongest = strong;
                 this.height = pokShow.height;
                 this.weight = pokShow.weight;
+
+                this.curr_desc = this.desc;
+                this.curr_evol = this.evol;
+                this.curr_str = this.strongest;
+                this.curr_weak = this.weakness;
             },
             resetAll() {
                 const list_pokemon = document.querySelectorAll(".list_pokemon");
@@ -237,30 +266,112 @@
                 this.height = '';
                 this.weight = '';
             },
-            showNextPokemon() {
-                // Show pokémon suivant
-            },
-            showPrevPokemon() {
-                // Show pokemon précédent
+            toggleGrid() {
+                const all_list = document.querySelectorAll('.list_text');
+                const list_pok = document.querySelectorAll('.list_pokemon');
+
+               if(this.toggle) {
+                   // Mode grid;
+                    this.toggle = false;
+                    all_list.forEach(el => {
+                        el.classList.add('none');
+                    })
+
+                    list_pok.forEach(el => {
+                        el.classList.add('list_grid')
+                    })
+
+                } else {
+                    // Mode list
+                    this.toggle = true;
+
+                    all_list.forEach(el => {
+                        el.classList.remove('none');
+                    })
+
+                    list_pok.forEach(el => {
+                        el.classList.remove('list_grid')
+                    })
+                }
+
             },
             showRandomPokemon() {
                 // Show un pokemon aléatoire
             },
+            showAllInfo() {
+                if(this.desc.length > 0) { this.curr_desc = this.desc } else { this.desc = this.curr_desc };
+                if(this.evol.length > 0) { this.curr_evol = this.evol } else { this.evol = this.curr_evol };
+                if(this.strongest.length > 0) { this.curr_str = this.strongest } else { this.strongest = this.curr_str };
+                if(this.weakness.length > 0) { this.curr_weak = this.weakness } else { this.weakness = this.curr_weak };
+
+                this.desc = this.curr_desc;
+                this.evol = this.curr_evol;
+                this.strongest = this.curr_str;
+                this.weakness = this.curr_weak;
+            },
             showDesc() {
-                // Affiche la description unique
+                if(this.desc.length > 0) { this.curr_desc = this.desc } else { this.desc = this.curr_desc };
+                if(this.evol.length > 0) { this.curr_evol = this.evol } else { this.evol = this.curr_evol };
+                if(this.strongest.length > 0) { this.curr_str = this.strongest } else { this.strongest = this.curr_str };
+                if(this.weakness.length > 0) { this.curr_weak = this.weakness } else { this.weakness = this.curr_weak };
+
+                this.curr_desc = this.desc;
+                this.curr_evol = this.evol;
+                this.curr_str = this.strongest;
+                this.curr_weak = this.weakness;
+
+                this.evol = [];
+                this.strongest = [];
+                this.weakness = [];
             },
             showEvol() {
-                // Affiche la minaiture de l'évolution unique
+                if(this.desc.length > 0) { this.curr_desc = this.desc } else { this.desc = this.curr_desc };
+                if(this.evol.length > 0) { this.curr_evol = this.evol } else { this.evol = this.curr_evol };
+                if(this.strongest.length > 0) { this.curr_str = this.strongest } else { this.strongest = this.curr_str };
+                if(this.weakness.length > 0) { this.curr_weak = this.weakness } else { this.weakness = this.curr_weak };
+
+                this.curr_desc = this.desc;
+                this.curr_evol = this.evol;
+                this.curr_str = this.strongest;
+                this.curr_weak = this.weakness;
+
+                this.desc = '';
+                this.strongest = [];
+                this.weakness = [];
             },
             playCri() {
                 const sound = new Audio(this.cri);
                 sound.play();
             },
             showStrongest() {
-                // Affiche les forces du pokemon (type) unique
+                if(this.desc.length > 0) { this.curr_desc = this.desc } else { this.desc = this.curr_desc };
+                if(this.evol.length > 0) { this.curr_evol = this.evol } else { this.evol = this.curr_evol };
+                if(this.strongest.length > 0) { this.curr_str = this.strongest } else { this.strongest = this.curr_str };
+                if(this.weakness.length > 0) { this.curr_weak = this.weakness } else { this.weakness = this.curr_weak };
+
+                this.curr_desc = this.desc;
+                this.curr_evol = this.evol;
+                this.strongest = this.strongest;
+                this.curr_weak = this.weakness;
+
+                this.desc = '';
+                this.evol = [];
+                this.weakness = [];
             },
             showWeakness() {
-                // Affiche les faiblesses du pokemon (type) unique
+                if(this.desc.length > 0) { this.curr_desc = this.desc } else { this.desc = this.curr_desc };
+                if(this.evol.length > 0) { this.curr_evol = this.evol } else { this.evol = this.curr_evol };
+                if(this.strongest.length > 0) { this.curr_str = this.strongest } else { this.strongest = this.curr_str };
+                if(this.weakness.length > 0) { this.curr_weak = this.weakness } else { this.weakness = this.curr_weak };
+
+                this.curr_desc = this.desc;
+                this.curr_evol = this.evol;
+                this.strongest = this.strongest;
+                this.curr_weak = this.weakness;
+
+                this.desc = '';
+                this.evol = [];
+                this.strongest = [];
             },
 
         },
@@ -383,6 +494,7 @@
     .screen_left img {
         height: 65%;
         width: auto;
+        filter: drop-shadow(0 0 2.2rem black);
     }
 
     .screen_left, .screen_down, .screen_right {
@@ -432,6 +544,11 @@
         background-color: #333333;
         box-shadow: inset 4px 4px 8px rgba(1, 1, 1, .5);
         border-radius: 5px;
+    }
+
+    .grid {
+        display: flex;
+        flex-wrap: wrap;
     }
 
     .bloc_direction {
@@ -537,6 +654,20 @@
         margin-right: 10px;
     }
 
+    .list_grid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        height: 45px;
+        width: 45px;
+        border-radius: 5px;
+        margin: 0 0 5px 6px;
+    }
+    .list_grid img {
+        margin: 0 auto;
+    }
+
     /*------RIGHT------*/
     #bloc_right {
         padding-left: 100px;
@@ -552,42 +683,87 @@
     }
 
     .desc_all {
-        height: max-content;
+        height: auto;
         width: 94%;
         border-radius: 4px;
         margin: 0 auto;
         padding: 4px 6px;
     }
 
+    .header_name_type {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: solid 1px #999;
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+
+    .header_name_type img {
+        margin-right: 5px;
+    }
+
     #name {
         font-family: 'Major Mono Display', monospace;
         font-family: 'Audiowide', cursive;
         font-size: 1.2em;
-    }
-
-    #name, #type {
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
 
     #desc {
         font-family: 'Press Start 2P', cursive;
         font-size: .7em;
-        line-height: 1.8em;
-        border-top: 1px solid #F3F3F3;
-        border-bottom: 1px solid #F3F3F3;
-        padding: 10px 0;
+        line-height: 1.9em;
+        padding: 0px 5px;
+        margin-bottom: 15px;
+        color: #A0A0A0;
     }
 
     #evol {
         display: flex;
         flex-direction: column;
         height: max-content;
-        border-bottom: 1px solid #F3F3F3;
-        padding: 8px 0;
+        padding: 5px 10px 10px 10px;
+        border-radius: 8px;
+        background-color: #444;
+        margin-bottom: 15px;
     }
 
     .evol_img {
+        cursor: pointer;
         display: flex;
+        border-radius: 10px;
+        border: dashed 1px #777777 ;
+        margin-top: 5px;
+    }
+
+    .evol_img img {
+        margin: 0 10px;
+    }
+
+    .evols_txt {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: .82em;
+    }
+    .evols_txt p {
+        color: #777;
+    }
+
+    .evol_img:hover {
+        background-color: #333333;
+        border: solid 1px #777777;
+    }
+
+    .evol_img:hover .evols_txt p{
+        color: #F5F5F5;
+    }
+
+    .evol_img:active {
+        transform: scale(.98);
     }
 
     #evol p {
@@ -602,24 +778,27 @@
     }
 
     #force_faiblesse {
-        padding: 10px 0;
         font-family: 'Audiowide', cursive;
         font-size: .9em;
-        border-bottom: 1px solid #F3F3F3;
     }
 
     #force_faiblesse h3 {
-        margin-bottom: 5px;
+        color: #AAA;
+        margin-bottom: 10px;
     }
 
     #force_faiblesse img {
         background-color: tomato;
         margin-bottom: 0px;
-        margin-right: 3px;
+        margin-right: 5px;
     }
 
-    #force {
+    #force, #faiblesse {
         margin-bottom: 8px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: dashed 1px #525252;
+        margin-bottom: 15px;
     }
 
     #height, #weight  {
@@ -637,9 +816,6 @@
     #height p, #weight p {
         font-size: 1.2em;
     }
-
-
-
 
     .bloc_btn_blue {
         width: 350px;
@@ -725,7 +901,8 @@
     }
 
     .none {
-        visibility: hidden;
+        padding: 0px;
+        margin: 0px;
         display: none;
     }
 
