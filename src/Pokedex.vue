@@ -890,6 +890,7 @@
     .bloc_screen div {
         height: 70px;
         width: 150px;
+        color: #A0A0A0;
         background-color: #333333;
         box-shadow: inset 4px 4px 8px rgba(1, 1, 1, .5);
         border-radius: 5px;
