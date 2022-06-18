@@ -34,16 +34,16 @@
 
                     <div class="dir_center"></div>
 
-                    <button class="up">
+                    <button class="up" @click="btnDirection('up', actual)">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224z"/></svg>
                     </button>
-                    <button class="right">
+                    <button class="right" @click="btnDirection('right', actual)">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M118.6 105.4l128 127.1C252.9 239.6 256 247.8 256 255.1s-3.125 16.38-9.375 22.63l-128 127.1c-9.156 9.156-22.91 11.9-34.88 6.943S64 396.9 64 383.1V128c0-12.94 7.781-24.62 19.75-29.58S109.5 96.23 118.6 105.4z"/></svg>
                     </button>
-                    <button class="down">
+                    <button class="down" @click="btnDirection('down', actual)">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"/></svg>
                     </button>
-                    <button class="left">
+                    <button class="left" @click="btnDirection('left', actual)">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M137.4 406.6l-128-127.1C3.125 272.4 0 264.2 0 255.1s3.125-16.38 9.375-22.63l128-127.1c9.156-9.156 22.91-11.9 34.88-6.943S192 115.1 192 128v255.1c0 12.94-7.781 24.62-19.75 29.58S146.5 415.8 137.4 406.6z"/></svg>
                     </button>
                 </div>
@@ -98,10 +98,10 @@
                 <button @click="showStrongest()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M416 288h-95.1c-17.67 0-32 14.33-32 32s14.33 32 32 32H416c17.67 0 32-14.33 32-32S433.7 288 416 288zM352 416h-32c-17.67 0-32 14.33-32 32s14.33 32 32 32h32c17.67 0 31.1-14.33 31.1-32S369.7 416 352 416zM480 160h-159.1c-17.67 0-32 14.33-32 32s14.33 32 32 32H480c17.67 0 32-14.33 32-32S497.7 160 480 160zM544 32h-223.1c-17.67 0-32 14.33-32 32s14.33 32 32 32H544c17.67 0 32-14.33 32-32S561.7 32 544 32zM151.6 41.95c-12.12-13.26-35.06-13.26-47.19 0l-87.1 96.09C4.475 151.1 5.35 171.4 18.38 183.3c6.141 5.629 13.89 8.414 21.61 8.414c8.672 0 17.3-3.504 23.61-10.39L96 145.9v302C96 465.7 110.3 480 128 480s32-14.33 32-32.03V145.9L192.4 181.3C204.4 194.3 224.6 195.3 237.6 183.3c13.03-11.95 13.9-32.22 1.969-45.27L151.6 41.95z"/></svg>
                 </button>
-                <button>
+                <button @click="scrollUp()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M318 145.6c-3.812 8.75-12.45 14.41-22 14.41L224 160v272c0 44.13-35.89 80-80 80H32c-17.67 0-32-14.31-32-32s14.33-32 32-32h112C152.8 448 160 440.8 160 432V160L88 159.1c-9.547 0-18.19-5.656-22-14.41S63.92 126.7 70.41 119.7l104-112c9.498-10.23 25.69-10.23 35.19 0l104 112C320.1 126.7 321.8 136.8 318 145.6z"/></svg>
                 </button>
-                <button class="shuffle">
+                <button class="shuffle" @click="showRandomPokemon()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M424.1 287c-15.13-15.12-40.1-4.426-40.1 16.97V352H336L153.6 108.8C147.6 100.8 138.1 96 128 96H32C14.31 96 0 110.3 0 128s14.31 32 32 32h80l182.4 243.2C300.4 411.3 309.9 416 320 416h63.97v47.94c0 21.39 25.86 32.12 40.99 17l79.1-79.98c9.387-9.387 9.387-24.59 0-33.97L424.1 287zM336 160h47.97v48.03c0 21.39 25.87 32.09 40.1 16.97l79.1-79.98c9.387-9.391 9.385-24.59-.0013-33.97l-79.1-79.98c-15.13-15.12-40.99-4.391-40.99 17V96H320c-10.06 0-19.56 4.75-25.59 12.81L254 162.7L293.1 216L336 160zM112 352H32c-17.69 0-32 14.31-32 32s14.31 32 32 32h96c10.06 0 19.56-4.75 25.59-12.81l40.4-53.87L154 296L112 352z"/></svg>
                 </button>
                 <button class="github">
@@ -115,7 +115,7 @@
                 <button @click="showWeakness()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M320 224H416c17.67 0 32-14.33 32-32s-14.33-32-32-32h-95.1c-17.67 0-32 14.33-32 32S302.3 224 320 224zM320 352H480c17.67 0 32-14.33 32-32s-14.33-32-32-32h-159.1c-17.67 0-32 14.33-32 32S302.3 352 320 352zM320 96h32c17.67 0 31.1-14.33 31.1-32s-14.33-32-31.1-32h-32c-17.67 0-32 14.33-32 32S302.3 96 320 96zM544 416h-223.1c-17.67 0-32 14.33-32 32s14.33 32 32 32H544c17.67 0 32-14.33 32-32S561.7 416 544 416zM192.4 330.7L160 366.1V64.03C160 46.33 145.7 32 128 32S96 46.33 96 64.03v302L63.6 330.7c-6.312-6.883-14.94-10.38-23.61-10.38c-7.719 0-15.47 2.781-21.61 8.414c-13.03 11.95-13.9 32.22-1.969 45.27l87.1 96.09c12.12 13.26 35.06 13.26 47.19 0l87.1-96.09c11.94-13.05 11.06-33.31-1.969-45.27C224.6 316.8 204.4 317.7 192.4 330.7z"/></svg>
                 </button>
-                <button>
+                <button @click="scrollDown()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M313.6 392.3l-104 112c-9.5 10.23-25.69 10.23-35.19 0l-104-112c-6.484-6.984-8.219-17.17-4.406-25.92S78.45 352 88 352H160V80C160 71.19 152.8 64 144 64H32C14.33 64 0 49.69 0 32s14.33-32 32-32h112C188.1 0 224 35.88 224 80V352h72c9.547 0 18.19 5.656 22 14.41S320.1 385.3 313.6 392.3z"/></svg>
                 </button>
             </div>
@@ -161,7 +161,7 @@
         data() {
             return {
                 pokemon: pokemon_list,
-                actual: '',
+                actual: null,
                 show: false,
                 toggle: true,
 
@@ -181,10 +181,15 @@
                 curr_evol: [],
                 curr_str: [],
                 curr_weak: [],
+
+                scroll: 0,
+                scroll_hgt: 0,
+
+                first_click: true,
             }
         },
         methods: {
-            selectPok(id) {
+            selectPok(id, direct) {
                 const list_pokemon = document.querySelectorAll(".list_pokemon");
                 list_pokemon.forEach(el => {
                     el.classList.remove('selected');
@@ -193,58 +198,80 @@
                 const pokemonChoosed = list_pokemon[id-1];
                 pokemonChoosed.classList.add('selected');
 
-                this.actual = id;
+                if(!direct) {
+                    this.actual = (id-1);
+                }
+
+                if(this.actual != null) {
+                    this.first_click = false;
+                }
+
+                console.log("FIRST CLICK : "+ this.first_click);
+                console.log("ACUTAL : "+ this.actual);
+
+
             },
             showPokemon() {
-                const list_pokemon = document.querySelectorAll(".list_pokemon");
-                list_pokemon.forEach(el => {
-                    el.classList.remove('selected');
-                })
+                if(this.actual !== null) {
+                    const list_pokemon = document.querySelectorAll(".list_pokemon");
+                    list_pokemon.forEach(el => {
+                        el.classList.remove('selected');
+                    })
 
-                const pokShow = this.pokemon[this.actual-1];
+                    const pokShow = this.pokemon[this.actual];
 
-                const evol_array = [];
-                pokShow.evol.forEach(el => {
-                    const pok = {
-                        src: `./miniature/${this.pokemon[el-1].number}.png`,
-                        name: this.pokemon[el-1].name,
-                        number: this.pokemon[el-1].number,
+                    const evol_array = [];
+                    pokShow.evol.forEach(el => {
+                        const pok = {
+                            src: `./miniature/${this.pokemon[el-1].number}.png`,
+                            name: this.pokemon[el-1].name,
+                            number: this.pokemon[el-1].number,
+                        }
+                        evol_array.push(pok);
+                    })
+
+                    const weak = [];
+                    for(let i = 0; i < pokShow.weakness.length; i++) {
+                        weak.push(`./type/${pokShow.weakness[i]}.png`)
                     }
-                    evol_array.push(pok);
-                })
 
-                const weak = [];
-                for(let i = 0; i < pokShow.weakness.length; i++) {
-                    weak.push(`./type/${pokShow.weakness[i]}.png`)
+                    const strong = [];
+                    for(let i = 0; i < pokShow.strongest.length; i++) {
+                        strong.push(`./type/${pokShow.strongest[i]}.png`)
+                    }
+
+                    const type_array = [];
+                    pokShow.type.forEach(ty => {
+                        type_array.push(`./type/${ty}.png`);
+                    })
+
+                    this.show = true;
+                    this.photo = pokShow.view;
+                    this.number = pokShow.number;
+                    this.name = pokShow.name;
+                    this.evol = evol_array;
+                    this.type = type_array;
+                    this.cri = pokShow.song;
+                    this.desc = pokShow.desc;
+                    this.weakness = weak;
+                    this.strongest = strong;
+                    this.height = pokShow.height;
+                    this.weight = pokShow.weight;
+
+                    this.curr_desc = this.desc;
+                    this.curr_evol = this.evol;
+                    this.curr_str = this.strongest;
+                    this.curr_weak = this.weakness;
+
+                    const screenRight = document.querySelector('.screen_right');
+                    const { scrollTop, scrollHeight } = screenRight;
+                    this.scroll = scrollTop;
+                    this.scroll_hgt = scrollHeight;
+
+                    screenRight.scrollTop = 0;
+
+                    this.first_click = true;
                 }
-
-                const strong = [];
-                for(let i = 0; i < pokShow.strongest.length; i++) {
-                    strong.push(`./type/${pokShow.strongest[i]}.png`)
-                }
-
-                const type_array = [];
-                pokShow.type.forEach(ty => {
-                    type_array.push(`./type/${ty}.png`);
-                })
-
-                this.show = true;
-                this.photo = pokShow.view;
-                this.number = pokShow.number;
-                this.name = pokShow.name;
-                this.evol = evol_array;
-                this.type = type_array;
-                this.cri = pokShow.song;
-                this.desc = pokShow.desc;
-                this.weakness = weak;
-                this.strongest = strong;
-                this.height = pokShow.height;
-                this.weight = pokShow.weight;
-
-                this.curr_desc = this.desc;
-                this.curr_evol = this.evol;
-                this.curr_str = this.strongest;
-                this.curr_weak = this.weakness;
             },
             resetAll() {
                 const list_pokemon = document.querySelectorAll(".list_pokemon");
@@ -253,7 +280,7 @@
                 })
 
                 this.show = false;
-                this.actual = '';
+                this.actual = null;
                 this.name = '';
                 this.number = '';
                 this.type = '';
@@ -265,12 +292,13 @@
                 this.strongest = [];
                 this.height = '';
                 this.weight = '';
+                this.first_click = true;
             },
             toggleGrid() {
                 const all_list = document.querySelectorAll('.list_text');
                 const list_pok = document.querySelectorAll('.list_pokemon');
 
-               if(this.toggle) {
+                if(this.toggle) {
                    // Mode grid;
                     this.toggle = false;
                     all_list.forEach(el => {
@@ -293,10 +321,12 @@
                         el.classList.remove('list_grid')
                     })
                 }
-
             },
             showRandomPokemon() {
-                // Show un pokemon aléatoire
+                const randomPokId = Math.floor(Math.random() * (151 - 1) + 1);
+
+                this.selectPok(randomPokId);
+                this.showPokemon();
             },
             showAllInfo() {
                 if(this.desc.length > 0) { this.curr_desc = this.desc } else { this.desc = this.curr_desc };
@@ -310,70 +340,104 @@
                 this.weakness = this.curr_weak;
             },
             showDesc() {
-                if(this.desc.length > 0) { this.curr_desc = this.desc } else { this.desc = this.curr_desc };
-                if(this.evol.length > 0) { this.curr_evol = this.evol } else { this.evol = this.curr_evol };
-                if(this.strongest.length > 0) { this.curr_str = this.strongest } else { this.strongest = this.curr_str };
-                if(this.weakness.length > 0) { this.curr_weak = this.weakness } else { this.weakness = this.curr_weak };
-
-                this.curr_desc = this.desc;
-                this.curr_evol = this.evol;
-                this.curr_str = this.strongest;
-                this.curr_weak = this.weakness;
+                this.showAllInfo();
 
                 this.evol = [];
                 this.strongest = [];
                 this.weakness = [];
             },
             showEvol() {
-                if(this.desc.length > 0) { this.curr_desc = this.desc } else { this.desc = this.curr_desc };
-                if(this.evol.length > 0) { this.curr_evol = this.evol } else { this.evol = this.curr_evol };
-                if(this.strongest.length > 0) { this.curr_str = this.strongest } else { this.strongest = this.curr_str };
-                if(this.weakness.length > 0) { this.curr_weak = this.weakness } else { this.weakness = this.curr_weak };
-
-                this.curr_desc = this.desc;
-                this.curr_evol = this.evol;
-                this.curr_str = this.strongest;
-                this.curr_weak = this.weakness;
+                this.showAllInfo();
 
                 this.desc = '';
                 this.strongest = [];
                 this.weakness = [];
             },
             playCri() {
-                const sound = new Audio(this.cri);
-                sound.play();
+                if(this.cri) {
+                    const sound = new Audio(this.cri);
+                    sound.play();
+                };
             },
             showStrongest() {
-                if(this.desc.length > 0) { this.curr_desc = this.desc } else { this.desc = this.curr_desc };
-                if(this.evol.length > 0) { this.curr_evol = this.evol } else { this.evol = this.curr_evol };
-                if(this.strongest.length > 0) { this.curr_str = this.strongest } else { this.strongest = this.curr_str };
-                if(this.weakness.length > 0) { this.curr_weak = this.weakness } else { this.weakness = this.curr_weak };
-
-                this.curr_desc = this.desc;
-                this.curr_evol = this.evol;
-                this.strongest = this.strongest;
-                this.curr_weak = this.weakness;
+                this.showAllInfo();
 
                 this.desc = '';
                 this.evol = [];
                 this.weakness = [];
             },
             showWeakness() {
-                if(this.desc.length > 0) { this.curr_desc = this.desc } else { this.desc = this.curr_desc };
-                if(this.evol.length > 0) { this.curr_evol = this.evol } else { this.evol = this.curr_evol };
-                if(this.strongest.length > 0) { this.curr_str = this.strongest } else { this.strongest = this.curr_str };
-                if(this.weakness.length > 0) { this.curr_weak = this.weakness } else { this.weakness = this.curr_weak };
-
-                this.curr_desc = this.desc;
-                this.curr_evol = this.evol;
-                this.strongest = this.strongest;
-                this.curr_weak = this.weakness;
+                this.showAllInfo();
 
                 this.desc = '';
                 this.evol = [];
                 this.strongest = [];
             },
+            scrollUp() {
+                const screenRight = document.querySelector('.screen_right');
+                const { scrollTop, scrollHeight } = screenRight;
+                this.scroll = scrollTop;
+                this.scroll_hgt = scrollHeight;
 
+                screenRight.scrollTop = this.scroll - (this.scroll_hgt / 20)
+                this.scroll = screenRight.scrollTop;
+            },
+            scrollDown() {
+                const screenRight = document.querySelector('.screen_right');
+                const { scrollTop, scrollHeight } = screenRight;
+                this.scroll = scrollTop;
+                this.scroll_hgt = scrollHeight;
+
+                screenRight.scrollTop = this.scroll + (this.scroll_hgt / 20)
+                this.scroll = screenRight.scrollTop;
+            },
+            btnDirection(dir, act) {
+                if(this.first_click) {
+                    console.log("=====1er_Click=====")
+
+                    if((dir == 'up' || dir == 'down' || dir == 'left' || dir == 'right') && act == null) {
+                        this.actual = this.actual + 1;
+                        this.selectPok((act+1), true);
+
+                        console.log("IF");
+                    }
+
+                    this.first_click = false;
+                } else {
+                    if(this.toggle) {
+                        if(dir == 'up' || dir == 'left') {
+                            if(act === 1) {
+                                this.selectPok(1, true);
+                            } else {
+                                this.actual = this.actual - 1;
+                                this.selectPok((act-1), true);
+                            }
+                        };
+                        if(dir == 'down' || dir == 'right') {
+                            if(act === 151) {
+                                this.selectPok(151, true);
+                            } else {
+                                this.actual = this.actual + 1;
+                                this.selectPok((act+1), true);
+                            }
+                        };
+                    }
+
+                    if(!this.toggle) {
+                        if(dir == 'left') {
+                            this.actual = this.actual - 1;
+                            this.selectPok((act-1), true);
+                        };
+                        if(dir == 'right') {
+                            this.actual = this.actual + 1;
+                            this.selectPok((act+1), true);
+                        };
+
+
+                    }
+                }
+
+            },
         },
     }
 </script>
@@ -385,6 +449,7 @@
         box-sizing: border-box;
         padding: 0;
         margin: 0;
+        scroll-behavior: smooth;
     }
 
     body {
@@ -492,9 +557,10 @@
     }
 
     .screen_left img {
-        height: 65%;
-        width: auto;
-        filter: drop-shadow(0 0 2.2rem black);
+        object-fit: cover;
+        max-height: 65%;
+        max-width: 70%;
+        filter: drop-shadow(0 0 1.2rem black);
     }
 
     .screen_left, .screen_down, .screen_right {
