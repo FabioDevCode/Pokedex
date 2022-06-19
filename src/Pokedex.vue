@@ -64,7 +64,7 @@
                     </p>
                     <div v-if="evol.length > 0" id="evol">
                         <p class="evol_title">Evolution</p>
-                        <div class="evol_img" :key="ev" v-for="ev in evol">
+                        <div :key="ev.id" class="evol_img" @click="selectAndShow(ev.number)" v-for="ev in evol">
                             <img :src="ev.src" alt="Evolution">
                             <div class="evols_txt">
                                 <p> {{ ev.name }} </p>
@@ -154,7 +154,7 @@
 
 
 <script>
-    import { pokemon_list } from "./assets/data/pokemon.js";
+import { pokemon_list } from "./assets/data/pokemon.js";
 
     export default {
         name: 'Pokedex',
@@ -186,10 +186,137 @@
                 scroll_hgt: 0,
 
                 first_click: true,
+
+                scroll_screen: 0,
+                scroll_screen_hgt: 0,
+
+                count: 0,
+                count_lr: 0,
             }
         },
         methods: {
-            selectPok(id, direct) {
+            selectAndShow(id) {
+                const showId = parseInt(id.replace("0", "").replace("0", ""));
+                this.selectPok(showId);
+                this.showPokemon();
+            },
+            dirSelect() {
+                const list_pokemon = document.querySelectorAll(".list_pokemon");
+                list_pokemon.forEach(el => {
+                    el.classList.remove('selected');
+                })
+
+                const pokemonChoosed = list_pokemon[this.actual];
+                pokemonChoosed.classList.add('selected');
+
+                if(this.actual != null) {
+                    this.first_click = false;
+                }
+            },
+            btnDirection(dir, act) {
+                if(this.first_click) {
+                    if((dir == 'up' || dir == 'down' || dir == 'left' || dir == 'right')) {
+                        this.actual = 0;
+                        this.dirSelect();
+                    }
+                    this.first_click = false;
+                } else {
+                    if(this.toggle) {
+                        // LIST =======================================
+                        const screen_down = document.querySelector('.screen_down');
+                        const { scrollTop, scrollHeight } = screen_down;
+                        this.scroll_screen = scrollTop;
+                        this.scroll_screen_hgt = scrollHeight;
+
+                        if(dir == 'up' || dir == 'left') {
+                            if(act == 0 && act != null) {
+                                this.actual = act;
+                            } else {
+                                this.actual = act - 1;
+                            }
+                            screen_down.scrollTop = (40 * this.actual);
+                        };
+                        if(dir == 'down' || dir == 'right') {
+                            if(act == 150 && act != null) {
+                                this.actual = act;
+                            } else {
+                                this.actual = act + 1;
+                            }
+                            screen_down.scrollTop = (40 * this.actual);
+                        };
+
+                        this.dirSelect();
+                        this.scroll_screen = screen_down.scrollTop;
+                    } else {
+                        // GRID =======================================
+                        const screen_down = document.querySelector('.screen_down');
+                        const { scrollTop, scrollHeight } = screen_down;
+                        this.scroll_screen = scrollTop;
+                        this.scroll_screen_hgt = scrollHeight;
+
+                        if(dir == 'up') {
+                            if(this.count != 0) {
+                                this.count = this.count - 1;
+                            }
+                            if(act == 0 && act != null) {
+                                this.actual = act;
+                            } else {
+                                this.actual = act - 3;
+                            }
+                            screen_down.scrollTop = (40 * this.count);
+                        };
+                        if(dir == 'down') {
+                            if(this.count != 51) {
+                                this.count = this.count + 1;
+                            }
+                            if(act == 150 && act != null) {
+                                this.actual = act;
+                            } else if (act == 149) {
+                                this.actual = act + 1;
+                            } else {
+                                this.actual = act + 3;
+                            }
+                            screen_down.scrollTop = (40 * this.count);
+                        };
+                        if(dir == 'left') {
+                            if(act == 0 && act != null) {
+                                this.actual = act;
+                            } else {
+                                this.actual = act - 1;
+                            }
+
+                            if((this.actual+1)%3 == 0) {
+                                if(this.count != 0) {
+                                    this.count = this.count - 1;
+                                }
+                                screen_down.scrollTop = (40 * ((this.actual + 1) / 3)) - 40;
+                            } else {
+                                screen_down.scrollTop = (40 * this.count);
+                            }
+                        };
+                        if(dir == 'right') {
+                            if(act == 150 && act != null) {
+                                this.actual = act;
+                            } else {
+                                this.actual = act + 1;
+                            }
+
+                            if(this.actual%3 == 0) {
+                                if(this.count != 51) {
+                                    this.count = this.count + 1;
+                                }
+                                screen_down.scrollTop = (40 * (this.actual / 3));
+                            } else {
+                                screen_down.scrollTop = (40 * this.count);
+                            }
+                        };
+
+                        this.dirSelect();
+                        this.scroll_screen = screen_down.scrollTop;
+                    };
+                };
+            },
+            selectPok(id) {
                 const list_pokemon = document.querySelectorAll(".list_pokemon");
                 list_pokemon.forEach(el => {
                     el.classList.remove('selected');
@@ -198,18 +325,20 @@
                 const pokemonChoosed = list_pokemon[id-1];
                 pokemonChoosed.classList.add('selected');
 
-                if(!direct) {
-                    this.actual = (id-1);
-                }
+                this.actual = (id-1);
 
                 if(this.actual != null) {
                     this.first_click = false;
                 }
+            },
+            scrollScreenTop() {
+                const screen_down = document.querySelector('.screen_down');
+                const { scrollTop, scrollHeight } = screen_down;
+                this.scroll_screen = scrollTop;
+                this.scroll_screen_hgt = scrollHeight;
 
-                console.log("FIRST CLICK : "+ this.first_click);
-                console.log("ACUTAL : "+ this.actual);
-
-
+                screen_down.scrollTop = 0;
+                this.scroll_screen = screen_down.scrollTop;
             },
             showPokemon() {
                 if(this.actual !== null) {
@@ -263,6 +392,8 @@
                     this.curr_str = this.strongest;
                     this.curr_weak = this.weakness;
 
+                    this.scrollScreenTop();
+
                     const screenRight = document.querySelector('.screen_right');
                     const { scrollTop, scrollHeight } = screenRight;
                     this.scroll = scrollTop;
@@ -293,10 +424,19 @@
                 this.height = '';
                 this.weight = '';
                 this.first_click = true;
+
+                this.count = 0;
+                this.count_lr = 0;
             },
             toggleGrid() {
                 const all_list = document.querySelectorAll('.list_text');
                 const list_pok = document.querySelectorAll('.list_pokemon');
+                const screen_down = document.querySelector('.screen_down');
+                const list_pokemon = document.querySelectorAll(".list_pokemon");
+
+                list_pokemon.forEach(el => {
+                    el.classList.remove('selected');
+                })
 
                 if(this.toggle) {
                    // Mode grid;
@@ -321,6 +461,11 @@
                         el.classList.remove('list_grid')
                     })
                 }
+
+                this.resetAll();
+
+                this.scroll_screen = 0;
+                screen_down.scrollTop = this.scroll_screen;
             },
             showRandomPokemon() {
                 const randomPokId = Math.floor(Math.random() * (151 - 1) + 1);
@@ -390,53 +535,6 @@
 
                 screenRight.scrollTop = this.scroll + (this.scroll_hgt / 20)
                 this.scroll = screenRight.scrollTop;
-            },
-            btnDirection(dir, act) {
-                if(this.first_click) {
-                    console.log("=====1er_Click=====")
-
-                    if((dir == 'up' || dir == 'down' || dir == 'left' || dir == 'right') && act == null) {
-                        this.actual = this.actual + 1;
-                        this.selectPok((act+1), true);
-
-                        console.log("IF");
-                    }
-
-                    this.first_click = false;
-                } else {
-                    if(this.toggle) {
-                        if(dir == 'up' || dir == 'left') {
-                            if(act === 1) {
-                                this.selectPok(1, true);
-                            } else {
-                                this.actual = this.actual - 1;
-                                this.selectPok((act-1), true);
-                            }
-                        };
-                        if(dir == 'down' || dir == 'right') {
-                            if(act === 151) {
-                                this.selectPok(151, true);
-                            } else {
-                                this.actual = this.actual + 1;
-                                this.selectPok((act+1), true);
-                            }
-                        };
-                    }
-
-                    if(!this.toggle) {
-                        if(dir == 'left') {
-                            this.actual = this.actual - 1;
-                            this.selectPok((act-1), true);
-                        };
-                        if(dir == 'right') {
-                            this.actual = this.actual + 1;
-                            this.selectPok((act+1), true);
-                        };
-
-
-                    }
-                }
-
             },
         },
     }
@@ -721,16 +819,20 @@
     }
 
     .list_grid {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        height: 45px;
-        width: 45px;
+        height: 40px;
+        width: 40px;
         border-radius: 5px;
-        margin: 0 0 5px 6px;
+        margin: 0 0 0 10px;
     }
     .list_grid img {
+        object-fit: cover;
+        max-height: 100%;
+        max-width: 100%;
         margin: 0 auto;
     }
 
