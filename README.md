@@ -12,16 +12,7 @@
 #### Disponible par Pokémon :
 
 <div align="left" display="inline-block">
-  <ul width="100px" align="top">
-    <li>Nom</li>
-    <li>Photo</li>
-    <li>Types</li>
-    <li>Description</li>
-    <li>Cri du pokémon</li>
-    <li>Forces & Faiblesses</li>
-    <li>Taille moyenne</li>
-    <li>Poids moyen</li>
-  </ul>
+  <img align="right" width="150px" src="./src/assets/listReadme.png" alt="liste" /> 
 
   <img align="right" height="500px" src="./src/assets/PokedexPika.jpg" alt="Pokedex avec pikachu" /> 
 </div>
