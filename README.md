@@ -11,17 +11,16 @@
 
 #### Disponible par Pokémon :
 
-<div align="left" display="inline-block">
-  <img align="right" width="150px" src="./src/assets/listReadme.png" alt="liste" /> 
+<div align="center" display="inline-block">
+  <img align="left" width="200px" src="./src/assets/listReadme.png" alt="liste" /> 
 
   <img align="right" height="500px" src="./src/assets/PokedexPika.jpg" alt="Pokedex avec pikachu" /> 
 </div>
 
 
-<br>
-<br>
-<br>
-<br>
+<br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br>
 
 
 ##
