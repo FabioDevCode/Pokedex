@@ -1,15 +1,28 @@
-<br>
-
 <div align="center" style="display: flex">
   <img height="120px" src="./src/assets/readme_title.png" alt="Flat Pokedex Logo" />
 </div>
 
-<h1 align="center"> Kanto -| FR |- 1er Gen </h1>
+<div align="center">
+
+  ### 🇫🇷 | FR | 🇫🇷
+
+</div>
+
+<h1 align="center"> Kanto - 1er Génération </h1>
 
 
 #### Disponible par Pokémon :
 
-<p>Nom, Photo, Types, Description, Cri, Taille moyenne, Poids moyen, Forces & Faiblesses.</p>
+<ul>
+  <li>Nom</li>
+  <li>Photo</li>
+  <li>Types</li>
+  <li>Description</li>
+  <li>Cri du pokémon</li>
+  <li>Forces & Faiblesses</li>
+  <li>Taille moyenne</li>
+  <li>Poids moyen</li>
+</ul>
 
 
 <br>
