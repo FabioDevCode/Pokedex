@@ -16,7 +16,7 @@
 
   <br>
   
-  <img align="center" width="600px" height="600px" src="./src/assets/PokedexPika.jpg" alt="Pokedex avec pikachu" /> 
+  <img align="center" width="650px" height="650px" src="./src/assets/forReadMe.jpg" alt="Pokedex avec pikachu" /> 
 </div>
 
 
