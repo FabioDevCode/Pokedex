@@ -83,6 +83,10 @@
                        </div>
                     </div>
                 </div>
+                <div v-if="search" id="search">
+                    <input v-model="input_val" type="text" placeholder="Nom ou numéro..." spellcheck="false">
+                    <button @click="searchInput()" >Rechercher</button>
+                </div>
             </div>
 
             <div class="bloc_btn_blue">
@@ -104,10 +108,8 @@
                 <button class="shuffle" @click="showRandomPokemon()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M424.1 287c-15.13-15.12-40.1-4.426-40.1 16.97V352H336L153.6 108.8C147.6 100.8 138.1 96 128 96H32C14.31 96 0 110.3 0 128s14.31 32 32 32h80l182.4 243.2C300.4 411.3 309.9 416 320 416h63.97v47.94c0 21.39 25.86 32.12 40.99 17l79.1-79.98c9.387-9.387 9.387-24.59 0-33.97L424.1 287zM336 160h47.97v48.03c0 21.39 25.87 32.09 40.1 16.97l79.1-79.98c9.387-9.391 9.385-24.59-.0013-33.97l-79.1-79.98c-15.13-15.12-40.99-4.391-40.99 17V96H320c-10.06 0-19.56 4.75-25.59 12.81L254 162.7L293.1 216L336 160zM112 352H32c-17.69 0-32 14.31-32 32s14.31 32 32 32h96c10.06 0 19.56-4.75 25.59-12.81l40.4-53.87L154 296L112 352z"/></svg>
                 </button>
-                <button class="github">
-                    <a href="https://github.com/FabioDevCode" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
-                    </a>
+                <button class="search_btn" @click="toggleInput()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z"/></svg>
                 </button>
                 <button class="cri_pokemon" @click="playCri()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M412.6 182c-10.28-8.334-25.41-6.867-33.75 3.402c-8.406 10.24-6.906 25.35 3.375 33.74C393.5 228.4 400 241.8 400 255.1c0 14.17-6.5 27.59-17.81 36.83c-10.28 8.396-11.78 23.5-3.375 33.74c4.719 5.806 11.62 8.802 18.56 8.802c5.344 0 10.75-1.779 15.19-5.399C435.1 311.5 448 284.6 448 255.1S435.1 200.4 412.6 182zM473.1 108.2c-10.22-8.334-25.34-6.898-33.78 3.34c-8.406 10.24-6.906 25.35 3.344 33.74C476.6 172.1 496 213.3 496 255.1s-19.44 82.1-53.31 110.7c-10.25 8.396-11.75 23.5-3.344 33.74c4.75 5.775 11.62 8.771 18.56 8.771c5.375 0 10.75-1.779 15.22-5.431C518.2 366.9 544 313 544 255.1S518.2 145 473.1 108.2zM534.4 33.4c-10.22-8.334-25.34-6.867-33.78 3.34c-8.406 10.24-6.906 25.35 3.344 33.74C559.9 116.3 592 183.9 592 255.1s-32.09 139.7-88.06 185.5c-10.25 8.396-11.75 23.5-3.344 33.74C505.3 481 512.2 484 519.2 484c5.375 0 10.75-1.779 15.22-5.431C601.5 423.6 640 342.5 640 255.1S601.5 88.34 534.4 33.4zM301.2 34.98c-11.5-5.181-25.01-3.076-34.43 5.29L131.8 160.1H48c-26.51 0-48 21.48-48 47.96v95.92c0 26.48 21.49 47.96 48 47.96h83.84l134.9 119.8C272.7 477 280.3 479.8 288 479.8c4.438 0 8.959-.9314 13.16-2.835C312.7 471.8 320 460.4 320 447.9V64.12C320 51.55 312.7 40.13 301.2 34.98z"/></svg>
@@ -148,7 +150,7 @@
     </main>
 
     <footer>
-        <p>Coded by <a target="_blank" href="https://www.linkedin.com/in/fabio-ramoslopes/">Fabio R. LOPES</a></p>
+        <p>Codé par <a target="_blank" href="https://www.linkedin.com/in/fabio-ramoslopes/">Fabio R. LOPES</a></p>
     </footer>
 </template>
 
@@ -164,6 +166,9 @@ import { pokemon_list } from "./assets/data/pokemon.js";
                 actual: null,
                 show: false,
                 toggle: true,
+
+                search: false,
+                input_val: '',
 
                 name: '',
                 number: '',
@@ -375,6 +380,7 @@ import { pokemon_list } from "./assets/data/pokemon.js";
                     })
 
                     this.show = true;
+                    this.search = false;
                     this.photo = pokShow.view;
                     this.number = pokShow.number;
                     this.name = pokShow.name;
@@ -536,6 +542,65 @@ import { pokemon_list } from "./assets/data/pokemon.js";
                 screenRight.scrollTop = this.scroll + (this.scroll_hgt / 20)
                 this.scroll = screenRight.scrollTop;
             },
+            toggleInput() {
+                this.search = !this.search;
+                if(this.actual != null) {
+                    this.show = !this.show;
+                } else {
+                    this.show = false;
+                }
+            },
+            searchInput() {
+                let pok = ((this.input_val).toLowerCase().charAt(0).toUpperCase() + (this.input_val).toLowerCase().slice(1)).trim().replace(/ /g, "");
+
+                let pokId = null;
+                if(isNaN(parseInt(pok))) {
+                    try {
+                        if(pok.substr(-4) == "mime" || pok.substr(-4) == "Mime") {
+                            pok = "M. Mime";
+                        };
+                        pokId = (this.pokemon.find(el => el.name == pok)).id;
+                    } catch (err) {
+                        Toastify({
+                        text: "Ce Pokémon n'existe pas.",
+                        duration: 3000,
+                        newWindow: true,
+                        gravity: "bottom", // `top` or `bottom`
+                        position: "center", // `left`, `center` or `right`
+                        stopOnFocus: true, // Prevents dismissing of toast on hover
+                        style: {
+                            background: "#F3F3F3",
+                            color: "#222",
+                        }
+                        }).showToast();
+
+                        return;
+                    }
+                } else {
+                    try {
+                        pokId = (this.pokemon.find(el => el.id == pok)).id;
+                    } catch (err) {
+                        Toastify({
+                        text: "Ce Pokémon n'existe pas.",
+                        duration: 3000,
+                        newWindow: true,
+                        gravity: "bottom", // `top` or `bottom`
+                        position: "center", // `left`, `center` or `right`
+                        stopOnFocus: true, // Prevents dismissing of toast on hover
+                        style: {
+                            background: "#F3F3F3",
+                            color: "#222",
+                        }
+                        }).showToast();
+
+                        return;
+                    }
+                }
+
+                this.actual = (pokId - 1)
+                this.input_val = '';
+                this.showPokemon();
+            }
         },
     }
 </script>
@@ -552,7 +617,7 @@ import { pokemon_list } from "./assets/data/pokemon.js";
 
     body {
         overflow-x: hidden;
-        min-width: 375px;
+        min-width: 450px;
         background-color: #AD4B46;
         color: #F3F3F3;
         font-family: Helvetica, sans-serif;
@@ -1069,6 +1134,57 @@ import { pokemon_list } from "./assets/data/pokemon.js";
         filter: drop-shadow(4px 4px 12px rgba(1, 1, 1, .4));
     }
 
+    #search {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        width: 95%;
+        margin: 0 auto;
+        border-radius: 4px;
+    }
+
+    #search input {
+        height: 45%;
+        border-radius: 5px;
+        background-color: #353535;
+        border: 1px solid #555;
+        color: #F3F3F3;
+        padding: 0 10px;
+        outline: none;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 1.1em;
+        text-align: center;
+    }
+
+    #search input::placeholder {
+        font-size: .9em;
+        color: #555;
+    }
+
+    #search input:focus {
+        border: 1px solid #F3F3F3;
+    }
+
+    #search button {
+        cursor: pointer;
+        font-family: 'Audiowide', cursive;
+        font-size: 1.2em;
+        height: 45%;
+        border-radius: 5px;
+        background-color: #444;
+        color: #777;
+    }
+
+    #search button:hover {
+        background-color: #F3F3F3;
+        color: #353535;
+    }
+
+    #search button:active {
+        transform: scale(.95);
+    }
+
     .none {
         padding: 0px;
         margin: 0px;
@@ -1093,4 +1209,19 @@ import { pokemon_list } from "./assets/data/pokemon.js";
         text-shadow: 0 0 2px #333333;
     }
 
+    @media screen and (max-width: 950px) {
+        main {
+            height: auto;
+            width: auto;
+            flex-direction: column;
+        }
+
+        main .bloc {
+            margin: 0 auto;
+        }
+
+        #bloc_right {
+            padding: 0 50px;
+        }
+    }
 </style>
