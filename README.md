@@ -8,22 +8,23 @@
   
 </div>
 
+<br>
 
-#### Disponible par Pokémon :
 
 <div align="center" display="inline-block">
-  <img align="left" width="200px" src="./src/assets/listReadme.png" alt="liste" /> 
+  <p>Nom - Photo - Types - Description - Cri du pokémon - Forces - Faiblesses - Taille moyenne - Poids moyen </p>
 
-  <img align="right" height="500px" src="./src/assets/PokedexPika.jpg" alt="Pokedex avec pikachu" /> 
+  <br>
+  
+  <img align="center" width="600px" height="600px" src="./src/assets/PokedexPika.jpg" alt="Pokedex avec pikachu" /> 
 </div>
 
 
-<br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br>
+<br><br>
 
 
 ##
 
+<br>
 
 <img align="right" src="https://badgen.net/badge/Made with ❤️ by/Fabio R. Lopes/AD4B46?icon=" />
