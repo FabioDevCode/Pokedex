@@ -27,6 +27,6 @@
 
 <br>
 
-<img align="right" src="https://badgen.net/badge/Made with ❤️ by/Fabio R. Lopes/AD4B46?icon=" />
+<img align="right" src="https://badgen.net/badge/Fait avec ❤️ par/Fabio R. Lopes/AD4B46?icon=" />
 
 <br>
