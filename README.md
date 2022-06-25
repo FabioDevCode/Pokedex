@@ -1,5 +1,5 @@
 <div align="center" style="display: flex">
-  <img height="120px" src="./src/assets/readme_title.png" alt="Pokedex Logo" />
+  <img height="90px" src="./src/assets/readme_title.png" alt="Pokedex Logo" />
 </div>
 
 <div align="center">
@@ -16,7 +16,11 @@
 
   <br>
   
+<<<<<<< HEAD
   <img align="center" width="650px" height="auto" src="./src/assets/imgReadMe.jpg" alt="Pokedex avec pikachu" /> 
+=======
+  <img align="center" width="100%" height="auto" src="./src/assets/forReadMe.jpg" alt="Pokedex avec pikachu" /> 
+>>>>>>> 710898ec8624b585046d75410c8e2a59cd87aa20
 </div>
 
 
@@ -27,6 +31,6 @@
 
 <br>
 
-<img align="right" src="https://badgen.net/badge/Made with ❤️ by/Fabio R. Lopes/AD4B46?icon=" />
+<img align="right" src="https://badgen.net/badge/Fait avec ❤️ par/Fabio R. Lopes/AD4B46?icon=" />
 
 <br>
