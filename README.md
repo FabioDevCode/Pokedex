@@ -16,11 +16,16 @@
 
   <br>
   
+<<<<<<< HEAD
   <img align="center" width="650px" height="auto" src="./src/assets/imgReadMe.jpg" alt="Pokedex avec pikachu" /> 
+=======
+  <img align="center" width="100%" height="auto" src="./src/assets/imgReadMe.jpg" alt="Pokedex avec pikachu" /> 
+
+>>>>>>> 07aea107082db1ed7f5b4b5872d0f4879d91e4d0
 </div>
 
 
-<br><br>
+<br>
 
 
 ##
