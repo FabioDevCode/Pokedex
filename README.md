@@ -5,23 +5,18 @@
 <div align="center">
 
   ## 🇫🇷 Pokedex 🇫🇷  <br><br>  Kanto - 1er Génération
-  
+
 </div>
 
 <br>
 
 
 <div align="center" display="inline-block">
-  <p>Nom - Photo - Types - Description - Cri du pokémon - Forces - Faiblesses - Taille moyenne - Poids moyen </p>
+	<p>Nom - Photo - Types - Description - Cri du pokémon - Forces - Faiblesses - Taille moyenne - Poids moyen </p>
 
-  <br>
-  
-<<<<<<< HEAD
-  <img align="center" width="650px" height="auto" src="./src/assets/imgReadMe.jpg" alt="Pokedex avec pikachu" /> 
-=======
-  <img align="center" width="100%" height="auto" src="./src/assets/imgReadMe.jpg" alt="Pokedex avec pikachu" /> 
+	<br>
 
->>>>>>> 07aea107082db1ed7f5b4b5872d0f4879d91e4d0
+	<img align="center" width="100%" height="auto" src="./src/assets/imgReadMe.jpg" alt="Pokedex avec pikachu" />
 </div>
 
 

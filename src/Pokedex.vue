@@ -220,6 +220,8 @@ import { pokemon_list } from "./assets/data/pokemon.js";
             },
             btnDirection(dir, act) {
                 if(this.first_click) {
+                    this.count = 0;
+
                     if((dir == 'up' || dir == 'down' || dir == 'left' || dir == 'right')) {
                         this.actual = 0;
                         this.dirSelect();
@@ -406,7 +408,6 @@ import { pokemon_list } from "./assets/data/pokemon.js";
                     this.scroll_hgt = scrollHeight;
 
                     screenRight.scrollTop = 0;
-
                     this.first_click = true;
                 }
             },
@@ -468,7 +469,7 @@ import { pokemon_list } from "./assets/data/pokemon.js";
                     })
                 }
 
-                this.resetAll();
+                // this.resetAll();
 
                 this.scroll_screen = 0;
                 screen_down.scrollTop = this.scroll_screen;
