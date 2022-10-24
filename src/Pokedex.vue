@@ -83,10 +83,10 @@
                        </div>
                     </div>
                 </div>
-                <div v-if="search" id="search">
+                <form v-if="search" id="search">
                     <input v-model="input_val" type="text" placeholder="Nom ou numéro..." spellcheck="false">
-                    <button @click="searchInput()" >Rechercher</button>
-                </div>
+                    <button @click.prevent="searchInput()" >Rechercher</button>
+                </form>
             </div>
 
             <div class="bloc_btn_blue">
