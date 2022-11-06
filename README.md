@@ -10,15 +10,13 @@
 
 <br>
 
-
 <div align="center" display="inline-block">
 	<p>Nom - Photo - Types - Description - Cri du pokémon - Forces - Faiblesses - Taille moyenne - Poids moyen </p>
-
-	<br>
-
-	<img align="center" width="100%" height="auto" src="./src/assets/imgReadMe.jpg" alt="Pokedex avec pikachu" />
 </div>
 
+<br>
+
+<img align="center" width="100%" height="auto" src="./src/assets/imgReadMe.jpg" alt="Pokedex avec pikachu" />
 
 <br>
 
