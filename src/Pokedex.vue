@@ -469,7 +469,7 @@ import { pokemon_list } from "./assets/data/pokemon.js";
                     })
                 }
 
-                // this.resetAll();
+                this.resetAll();
 
                 this.scroll_screen = 0;
                 screen_down.scrollTop = this.scroll_screen;
