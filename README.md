@@ -10,13 +10,7 @@
 
 ##
 
-<br>
 
-<div align="center" display="inline-block">
-	<p>Nom - Photo - Types - Description - Cri du pokémon - Forces - Faiblesses - Taille moyenne - Poids moyen </p>
-</div>
-
-##
 
 <br>
 
