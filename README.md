@@ -10,10 +10,6 @@
 
 ##
 
-
-
-<br>
-
 <img align="right" src="https://badgen.net/badge/Fait avec ❤️ par/Fabio R. Lopes/AD4B46?icon=" />
 
 <br>
