@@ -150,7 +150,7 @@
     </main>
 
     <footer>
-        <p>Codé par <a target="_blank" href="https://www.linkedin.com/in/fabio-ramoslopes/">Fabio R. LOPES</a></p>
+        <p>Codé par <a target="_blank" href="https://www.linkedin.com/in/fabio-developpeur-web-javascript-node-vue/">Fabio R. LOPES</a></p>
     </footer>
 </template>
 
